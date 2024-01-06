@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const SideNavBar = () => {
   return (
     <>
-      <div className="h-screen w-[70px] md:w-[262px] bg-zinc-100 shadow">
-        <div className="h-full w-full my-8 px-4 md:px-10 flex flex-col gap-[30%]">
+      <div className=" w-[70px] md:w-[262px] bg-zinc-100 shadow">
+        <div className="px-4 md:px-10 flex flex-col gap-[30%] border">
           {/* Top Menu  */}
           <div className="flex flex-col justify-center">
             {/* Trade Mark  */}
