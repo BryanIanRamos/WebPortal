@@ -6,7 +6,7 @@ const SideNavBar = () => {
   return (
     <>
       <div className=" w-[70px] md:w-[262px] bg-zinc-100 shadow">
-        <div className="px-4 md:px-10 flex flex-col gap-[30%] border">
+        <div className="px-4 py-5 md:px-10 h-full flex flex-col gap-[30%]">
           {/* Top Menu  */}
           <div className="flex flex-col justify-center">
             {/* Trade Mark  */}
@@ -20,7 +20,7 @@ const SideNavBar = () => {
               </h1>
             </div>
             <hr className="my-5 border border-neutral-500" />
-            <div className="flex flex-col gap-3 max-md:justify-center max-md:items-center">
+            <div className="flex flex-col mt-2 gap-3 max-md:justify-center max-md:items-center">
               <Link to="/Home">
                 <div className="flex gap-4 text-black hover:underline items-center hover:text-neutral-500 cursor-pointer">
                   <Icon
