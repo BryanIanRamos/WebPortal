@@ -1,7 +1,9 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import { userData } from "../Middleware/helper";
 
 const TopBar = () => {
+  const { username } = userData();
   return (
     <>
       <div className="w-full h-[7%] bg-white grid grid-cols-2 shadow  top-0">
@@ -11,7 +13,7 @@ const TopBar = () => {
             className=" text-gray-400 w-[30px] h-[30px]"
           />
           <p className=" text-center text-stone-500 max-sm:text-[12px] text-base font-normal font-['Poppins']">
-            James Domingo
+            {username}
           </p>
         </div>
 

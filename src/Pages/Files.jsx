@@ -3,8 +3,14 @@ import SideNavBar from "../Components/SideNavBar";
 import TopBar from "../Components/TopBar";
 import { Icon } from "@iconify/react";
 import Header from "../Components/Header";
+import useFetch from "../Middleware/useFetch";
 
 const Files = () => {
+  const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
+
+  const { data } = useFetch(`${apiUrl}/api/file`);
+
+  // console.log(data);
   return (
     <section className="w-screen h-screen">
       <TopBar />
@@ -27,84 +33,32 @@ const Files = () => {
             {/* <div className="w-full h-full border flex justify-center overflow-y-auto"> */}
             {/* Card Content  */}
             <div className="h-fit grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-5">
-              <div
-                className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
+              {data &&
+                data.map((file, index) => (
+                  <div
+                    className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
                 flex flex-col cursor-pointer items-center relative text-[#5A766A] hover:text-white"
-              >
-                <h1 className="text-sm font-bold font-['Poppins']">
-                  Life Lessons from Plants
-                </h1>
-                <hr className="w-full border my-2" />
-                <p className="text-[11px] font-normal font-['Poppins']  line-clamp-3 w-full">
-                  Reveals nature's wisdom, teaching us about resilience,
-                  adaptability, and balance in life.
-                </p>
-                <div className="absolute bottom-5 right-5 group-hover:text-white">
-                  <Icon
-                    icon="lets-icons:trash"
-                    className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
-                  />
-                </div>
-              </div>
-              <div
-                className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
-                flex flex-col cursor-pointer items-center relative text-[#5A766A] hover:text-white"
-              >
-                <h1 className="text-sm font-bold font-['Poppins']">
-                  Life Lessons from Plants
-                </h1>
-                <hr className="w-full border my-2" />
-                <p className="text-[11px] font-normal font-['Poppins']  line-clamp-3 w-full">
-                  Reveals nature's wisdom, teaching us about resilience,
-                  adaptability, and balance in life.
-                </p>
-                <div className="absolute bottom-5 right-5 group-hover:text-white">
-                  <Icon
-                    icon="lets-icons:trash"
-                    className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
-                  />
-                </div>
-              </div>
-              <div
-                className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
-                flex flex-col cursor-pointer items-center relative text-[#5A766A] hover:text-white"
-              >
-                <h1 className="text-sm font-bold font-['Poppins']">
-                  Life Lessons from Plants
-                </h1>
-                <hr className="w-full border my-2" />
-                <p className="text-[11px] font-normal font-['Poppins']  line-clamp-3 w-full">
-                  Reveals nature's wisdom, teaching us about resilience,
-                  adaptability, and balance in life.
-                </p>
-                <div className="absolute bottom-5 right-5 group-hover:text-white">
-                  <Icon
-                    icon="lets-icons:trash"
-                    className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
-                  />
-                </div>
-              </div>
-              <div
-                className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
-                flex flex-col cursor-pointer items-center relative text-[#5A766A] hover:text-white"
-              >
-                <h1 className="text-sm font-bold font-['Poppins']">
-                  Life Lessons from Plants
-                </h1>
-                <hr className="w-full border my-2" />
-                <p className="text-[11px] font-normal font-['Poppins']  line-clamp-3 w-full">
-                  Reveals nature's wisdom, teaching us about resilience,
-                  adaptability, and balance in life.
-                </p>
-                <div className="absolute bottom-5 right-5 group-hover:text-white">
-                  <Icon
-                    icon="lets-icons:trash"
-                    className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
-                  />
-                </div>
-              </div>
+                    key={file.file_id}
+                  >
+                    <h1 className="text-sm font-bold font-['Poppins']">
+                      {/* Life Lessons from Plants */}
+                      {file.name}
+                    </h1>
+                    <hr className="w-full border my-2" />
+                    <p className="text-[11px] font-normal font-['Poppins']  line-clamp-3 w-full">
+                      {/* Reveals nature's wisdom, teaching us about resilience,
+                      adaptability, and balance in life. */}
+                      {file.description}
+                    </p>
+                    <div className="absolute bottom-5 right-5 group-hover:text-white">
+                      <Icon
+                        icon="lets-icons:trash"
+                        className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
+                      />
+                    </div>
+                  </div>
+                ))}
             </div>
-            {/* </div> */}
           </section>
         </div>
       </div>

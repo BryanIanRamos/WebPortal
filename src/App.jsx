@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 import Activities from "./Pages/Activities";
 import Files from "./Pages/Files";
 import Webinars from "./Pages/Webinars";
+import { Protector } from "./Middleware/helper";
 
 function App() {
   return (
@@ -14,10 +15,18 @@ function App() {
         <Routes>
           <Route path="/" element={<Singin />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Files" element={<Files />} />
-          <Route path="/Activities" element={<Activities />} />
-          <Route path="/Webinars" element={<Webinars />} />
+
+          {/* ProtectedRoutes */}
+          <Route path="/Home" element={<Protector Component={Home} />} />
+          <Route path="/Files" element={<Protector Component={Files} />} />
+          <Route
+            path="/Activities"
+            element={<Protector Component={Activities} />}
+          />
+          <Route
+            path="/Webinars"
+            element={<Protector Component={Webinars} />}
+          />
         </Routes>
       </Routers>
     </>

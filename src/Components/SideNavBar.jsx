@@ -1,10 +1,54 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import { userData } from "../Middleware/helper";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SideNavBar = () => {
+  const { jwt } = userData();
+  const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
+
+  const handleLogout = async () => {
+    console.log("token", jwt);
+
+    try {
+      // Send a POST request to your logout API endpoint
+      const response = await fetch(`${apiUrl}/api/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`, // Include the bearer token in the header
+        },
+      });
+
+      console.log(response);
+
+      if (response.ok) {
+        setTimeout(() => {
+          // Delaying the execution of the following code by 1.5 seconds
+          console.log("logout!");
+          toast.success(
+            "Logged out successfully!",
+            {
+              hideProgressBar: true,
+            },
+            2000
+          );
+          localStorage.clear();
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000); // Redirecting the user to the homepage upon logging out
+        }, 1200);
+      }
+    } catch {
+      console.log();
+    }
+  };
+
   return (
     <>
+      <ToastContainer />
       <div className=" w-[70px] md:w-[262px] bg-zinc-100 shadow">
         <div className="px-4 py-5 md:px-10 h-full flex flex-col gap-[30%]">
           {/* Top Menu  */}
@@ -70,7 +114,10 @@ const SideNavBar = () => {
             </div>
           </div>
           {/* Bottom Menu  */}
-          <button className="text-black hover:underline items-center hover:text-neutral-500 cursor-pointer ">
+          <button
+            className="text-black hover:underline items-center hover:text-neutral-500 cursor-pointer "
+            onClick={handleLogout}
+          >
             <div className="flex gap-2 items-center max-md:justify-center max-md:items-center">
               <Icon
                 icon="ic:twotone-logout"
