@@ -11,6 +11,7 @@ const SideNavBar = () => {
 
   const handleLogout = async () => {
     console.log("token", jwt);
+    // localStorage.clear();
 
     try {
       // Send a POST request to your logout API endpoint

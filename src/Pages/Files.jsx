@@ -4,13 +4,40 @@ import TopBar from "../Components/TopBar";
 import { Icon } from "@iconify/react";
 import Header from "../Components/Header";
 import useFetch from "../Middleware/useFetch";
+import { userData } from "../Middleware/helper";
 
 const Files = () => {
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
+  const { jwt } = userData();
 
   const { data } = useFetch(`${apiUrl}/api/file`);
 
   console.log(data);
+
+  const deleteProduct = async (itemID) => {
+    try {
+      const response = await fetch(`http://webportal.test/api/file/${itemID}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      console.log(`Lesson with ID ${itemID} deleted successfully!`);
+      // Optionally handle success or further actions upon successful deletion
+
+      window.location.reload();
+    } catch (error) {
+      console.error("There was an error deleting the product:", error);
+      // Handle error scenarios (e.g., display an error message to the user)
+    }
+  };
+
   return (
     <section className="w-screen h-screen">
       <TopBar />
@@ -50,15 +77,19 @@ const Files = () => {
                       adaptability, and balance in life. */}
                       {file.description}
                     </p>
-                    <div className="absolute bottom-5 right-5 group-hover:text-white">
+                    <button
+                      className="absolute bottom-5 right-5 group-hover:text-white"
+                      onClick={() => deleteProduct(file.file_id)}
+                    >
                       <Icon
                         icon="lets-icons:trash"
                         className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
                       />
-                    </div>
+                    </button>
                     <button
                       className="w-[97px] h-[26px] bg-[#5A766A] group-hover:bg-zinc-100 rounded flex justify-center items-center
                     absolute bottom-5 left-5"
+                      onClick={() => window.open(file.link, "_blank")}
                     >
                       <span className="text-zinc-100 group-hover:text-[#5A766A] text-[12px] font-bold font-['Poppins']">
                         Open

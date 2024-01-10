@@ -75,11 +75,36 @@ const AddWebinar = () => {
                       </LocalizationProvider>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-black text-[18px] font-semibold font-['Poppins']">
-                      Link
-                    </h3>
-                    <input className="w-full lg:w-[265px] xl:w-[425px] h-[38px] rounded-[5px] border border-[#5A766A] px-3"></input>
+                  <div className="relative w-full">
+                    <div>
+                      <h3 className="text-black text-[18px] font-semibold font-['Poppins']">
+                        Link
+                      </h3>
+                      <input className="w-full lg:w-[265px] xl:w-[425px] h-[38px] rounded-[5px] border border-[#5A766A] px-3"></input>
+                    </div>
+                    <div className="absolute top-0 right-10">
+                      <select
+                        className="w-[200px] h-[56px] bg-zinc-100 rounded-[5px] pl-2 placeholder-white"
+                        name="category_name"
+                        // options={option}
+                        // value={prodData.category_name}
+                        // value={category_id}
+                        // onChange={(e) => setCategory_id(e.target.value)}
+                      >
+                        <option key={null} value={"empty"}>
+                          Option 1
+                        </option>
+                        <option key={null} value={"empty"}>
+                          Option 2
+                        </option>
+                        {/* {categories &&
+                          categories.map((elem) => ( */}
+                        {/* <option key={elem.category_id} value={elem.category_id}>
+                          {elem.category_name}
+                        </option> */}
+                        {/* ))} */}
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div className="">

@@ -7,7 +7,9 @@ import { userData } from "../Middleware/helper";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { username } = userData();
+  const { username, id } = userData();
+
+  console.log("id", id);
 
   return (
     <section className="w-screen h-screen">
