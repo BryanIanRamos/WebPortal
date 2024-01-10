@@ -3,8 +3,12 @@ import TopBar from "../Components/TopBar";
 import SideNavBar from "../Components/SideNavBar";
 import { Icon } from "@iconify/react";
 import Header from "../Components/Header";
+import { userData } from "../Middleware/helper";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { username } = userData();
+
   return (
     <section className="w-screen h-screen">
       <TopBar />
@@ -15,35 +19,41 @@ const Home = () => {
           {/* Header  */}
           <Header
             title={" Welcome Back"}
-            description={"James Domingo"}
+            description={username}
             showDate={true}
           />
           <section className="mt-6">
             <div className="grid grid-cols-3 gap-1">
-              <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
-                <Icon icon="bxs:book" className="  w-[40px] h-[40px]" />
-                <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
-                  Add Lessons
-                </p>
-              </div>
-              <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
-                <Icon
-                  icon="fluent:device-meeting-room-16-filled"
-                  className="  w-[40px] h-[40px]"
-                />
-                <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
-                  Add Webinars
-                </p>
-              </div>
-              <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
-                <Icon
-                  icon="ant-design:schedule-filled"
-                  className="  w-[40px] h-[40px]"
-                />
-                <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
-                  Add Activities
-                </p>
-              </div>
+              <Link to="/AddLesson">
+                <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
+                  <Icon icon="bxs:book" className="  w-[40px] h-[40px]" />
+                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
+                    Add Lessons
+                  </p>
+                </div>
+              </Link>
+              <Link to="/AddWebinar">
+                <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
+                  <Icon
+                    icon="fluent:device-meeting-room-16-filled"
+                    className="  w-[40px] h-[40px]"
+                  />
+                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
+                    Add Webinars
+                  </p>
+                </div>
+              </Link>
+              <Link to="/AddActivities">
+                <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
+                  <Icon
+                    icon="ant-design:schedule-filled"
+                    className="  w-[40px] h-[40px]"
+                  />
+                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
+                    Add Activities
+                  </p>
+                </div>
+              </Link>
             </div>
           </section>
           <hr className="mt-7 mb-3 w-full border-1 border-[#5A766A]" />

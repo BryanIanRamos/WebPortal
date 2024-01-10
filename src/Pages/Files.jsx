@@ -10,7 +10,7 @@ const Files = () => {
 
   const { data } = useFetch(`${apiUrl}/api/file`);
 
-  // console.log(data);
+  console.log(data);
   return (
     <section className="w-screen h-screen">
       <TopBar />
@@ -56,6 +56,14 @@ const Files = () => {
                         className="text-[#DD4141] group-hover:text-white  w-[29px] h-[29px]"
                       />
                     </div>
+                    <button
+                      className="w-[97px] h-[26px] bg-[#5A766A] group-hover:bg-zinc-100 rounded flex justify-center items-center
+                    absolute bottom-5 left-5"
+                    >
+                      <span className="text-zinc-100 group-hover:text-[#5A766A] text-[12px] font-bold font-['Poppins']">
+                        Open
+                      </span>
+                    </button>
                   </div>
                 ))}
             </div>

@@ -7,6 +7,9 @@ import Activities from "./Pages/Activities";
 import Files from "./Pages/Files";
 import Webinars from "./Pages/Webinars";
 import { Protector } from "./Middleware/helper";
+import AddLessons from "./Pages/Extra Pages/AddLessons";
+import AddWebinar from "./Pages/Extra Pages/AddWebinar";
+import AddActivities from "./Pages/Extra Pages/AddActivities";
 
 function App() {
   return (
@@ -15,6 +18,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Singin />} />
           <Route path="/Signup" element={<Signup />} />
+
+          <Route path="/AddLesson" element={<AddLessons />} />
+          <Route path="/AddWebinar" element={<AddWebinar />} />
+          <Route path="/AddActivities" element={<AddActivities />} />
+          {/* <Route path="/Signup" element={<Signup />} />
+          <Route path="/Signup" element={<Signup />} /> */}
 
           {/* ProtectedRoutes */}
           <Route path="/Home" element={<Protector Component={Home} />} />
