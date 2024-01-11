@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import Header from "../Components/Header";
 import useFetch from "../Middleware/useFetch";
 import { userData } from "../Middleware/helper";
+import { Toaster, toast } from "sonner";
 
 const Files = () => {
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
@@ -12,11 +13,11 @@ const Files = () => {
 
   const { data } = useFetch(`${apiUrl}/api/file`);
 
-  console.log(data);
+  // console.log(data);
 
   const deleteProduct = async (itemID) => {
     try {
-      const response = await fetch(`http://webportal.test/api/file/${itemID}`, {
+      const response = await fetch(`${apiUrl}/api/file/${itemID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -30,8 +31,19 @@ const Files = () => {
 
       console.log(`Lesson with ID ${itemID} deleted successfully!`);
       // Optionally handle success or further actions upon successful deletion
+      setTimeout(() => {
+        toast.success(
+          `Activity has been deleted successfully!`,
+          {
+            hideProgressBar: true,
+          },
+          1500
+        );
+      }, 1500);
 
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2800);
     } catch (error) {
       console.error("There was an error deleting the product:", error);
       // Handle error scenarios (e.g., display an error message to the user)
@@ -40,6 +52,7 @@ const Files = () => {
 
   return (
     <section className="w-screen h-screen">
+      <Toaster richColors position="top-center" />
       <TopBar />
       <div className="flex h-[93%] flex-grow">
         <SideNavBar />
@@ -61,7 +74,7 @@ const Files = () => {
             {/* Card Content  */}
             <div className="h-fit grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-5 gap-y-5">
               {data &&
-                data.map((file, index) => (
+                data.map((file) => (
                   <div
                     className="group w-[250px] h-[179px] bg-zinc-100 hover:bg-[#5A766A] rounded-[5px] shadow px-4 py-6 
                 flex flex-col cursor-pointer items-center relative text-[#5A766A] hover:text-white"

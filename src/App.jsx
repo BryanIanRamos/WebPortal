@@ -10,6 +10,7 @@ import { Protector } from "./Middleware/helper";
 import AddLessons from "./Pages/Extra Pages/AddLessons";
 import AddWebinar from "./Pages/Extra Pages/AddWebinar";
 import AddActivities from "./Pages/Extra Pages/AddActivities";
+import ActivityList from "./Pages/Extra Pages/ActivityList";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/AddLesson" element={<AddLessons />} />
           <Route path="/AddWebinar" element={<AddWebinar />} />
           <Route path="/AddActivities" element={<AddActivities />} />
+          <Route path="/List-activity" element={<ActivityList />} />
           {/* <Route path="/Signup" element={<Signup />} />
           <Route path="/Signup" element={<Signup />} /> */}
 

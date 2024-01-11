@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import TopBar from "../Components/TopBar";
-import SideNavBar from "../Components/SideNavBar";
+import React from "react";
+import TopBar from "../../Components/TopBar";
+import SideNavBar from "../../Components/SideNavBar";
 import { Icon } from "@iconify/react";
-import Header from "../Components/Header";
-import useFetch from "../Middleware/useFetch";
+import Header from "../../Components/Header";
+import useFetch from "../../Middleware/useFetch";
 import { Link } from "react-router-dom";
+import { userData } from "../../Middleware/helper";
 import { Toaster, toast } from "sonner";
-import { userData } from "../Middleware/helper";
 
-const Activities = () => {
+const ActivityList = () => {
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
   const { jwt } = userData();
 
-  const { data } = useFetch(`${apiUrl}/api/false-activity`);
+  const { data } = useFetch(`${apiUrl}/api/true-activity`);
 
-  // console.log(data);
+  console.log(data);
 
   const deleteActivity = async (itemID) => {
     try {
@@ -58,69 +58,6 @@ const Activities = () => {
     }
   };
 
-  const updateActivity = async (id, newData) => {
-    const name = newData.name;
-    const deadline = newData.deadline;
-    const isDone = true;
-    const user_id = newData.user_id;
-    const sub_id = newData.sub_id;
-
-    // console.log("id", id);
-    // console.log("name", name);
-    // console.log("deadline", deadline);
-    // console.log("isDone", isDone);
-    // console.log("user_id", user_id);
-    // console.log("sub_id", sub_id);
-
-    try {
-      let response = await fetch(`${apiUrl}/api/activity/${id}`, {
-        method: "PUT", // or 'PATCH' depending on your API
-        headers: {
-          "Content-Type": "application/json",
-          // Accept: "application/json",
-          Authorization: `Bearer ${jwt}`,
-        },
-        body: JSON.stringify({
-          name,
-          deadline,
-          isDone: true,
-          user_id,
-          sub_id,
-        }),
-      });
-
-      console.log(response);
-
-      if (!response.ok) {
-        throw new Error("Failed to update data");
-      }
-
-      setTimeout(() => {
-        toast.success(
-          "Activity Updated!",
-          {
-            hideProgressBar: true,
-          },
-          1200
-        );
-      }, 1200);
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 2200);
-    } catch (error) {
-      // setError(error);
-      console.log("Error: ", error);
-      toast.error(
-        "Can't update activity!",
-        {
-          hideProgressBar: true,
-        },
-        2000
-      );
-    }
-  };
-
   return (
     <section className="w-screen h-screen">
       <Toaster richColors position="top-center" />
@@ -141,16 +78,17 @@ const Activities = () => {
           />
           <div className="relative flex items-center">
             <h1 className="text-[#5A766A] text-xl font-bold font-['Poppins'] my-3 md:my-4">
-              To Do List
+              Done List
             </h1>
             <div className="flex gap-2 absolute right-0 top-4">
-              <Link to="/List-activity">
+              <Link to="/Activities">
                 <button
                   className="w-[115px] h-[34px] bg-[#5A766A] rounded-[5px] 
                 flex justify-center items-center text-white gap-3"
                 >
+                  <Icon icon="typcn:arrow-back" className="w-[24px] h-[24px]" />
                   <p className="text-[15px] font-normal font-['Poppins']">
-                    View Done
+                    Back
                   </p>
                 </button>
               </Link>
@@ -197,15 +135,6 @@ const Activities = () => {
                   absolute top-2 right-3 cursor-pointer"
                       />
                     </button>
-                    <button
-                      className="w-[78px] h-6 bg-zinc-300 hover:bg-white rounded flex justify-center items-center absolute
-                bottom-3 right-3"
-                      onClick={() => updateActivity(activity.act_id, activity)}
-                    >
-                      <span className="text-[#5A766A] text-xs font-bold font-['Poppins']">
-                        Done
-                      </span>
-                    </button>
                   </div>
                 ))}
             </div>
@@ -216,4 +145,4 @@ const Activities = () => {
   );
 };
 
-export default Activities;
+export default ActivityList;

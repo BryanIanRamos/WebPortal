@@ -7,6 +7,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Toaster, toast } from "sonner";
 
 import { Link } from "react-router-dom";
 import useFetch from "../../Middleware/useFetch";
@@ -16,7 +17,7 @@ import { userData } from "../../Middleware/helper";
 
 const AddWebinar = () => {
   const [value, setValue] = React.useState(null);
-  // const { jwt, id } = userData();
+  const { jwt, id } = userData();
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
   const formattedDate = dayjs(value).format("MM/DD/YYYY");
 
@@ -35,22 +36,90 @@ const AddWebinar = () => {
     // Use formattedDate directly in the effect
     const formattedDate = dayjs(value).format("MM/DD/YYYY");
     setSched(formattedDate);
+    setUser(id);
   }, [value]);
-  // setUser(id);
-  console.log("formattedDate", formattedDate);
-  console.log("sub_id", sub_id);
+  // console.log("formattedDate", formattedDate);
+  // console.log("sub_id", sub_id);
 
   const submitWebinar = async () => {
-    console.log("name: ", name);
-    console.log("link: ", link);
-    console.log("sched: ", sched);
-    console.log("user_id: ", user_id);
-    console.log("sub_id: ", sub_id);
-    console.log("type_id: ", type_id);
+    // console.log("name: ", name);
+    // console.log("link: ", link);
+    // console.log("sched: ", sched);
+    // console.log("user_id: ", user_id);
+    // console.log("sub_id: ", sub_id);
+    // console.log("type_id: ", type_id);
+
+    if (name && link && sched && user_id && sub_id && type_id) {
+      try {
+        const response = await fetch(`${apiUrl}/api/webinar`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${jwt}`,
+          },
+          body: JSON.stringify({
+            name,
+            link,
+            sched,
+            user_id,
+            sub_id,
+            type_id,
+          }),
+        });
+
+        console.log("response", response);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const res = await response.json();
+
+        console.log("Webinar added successfully!");
+
+        setTimeout(() => {
+          toast.success(
+            "Webinar Added successfully!",
+            {
+              hideProgressBar: true,
+            },
+            1200
+          );
+        }, 1200);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2200);
+
+        // Pass the newly created product data to the parent component
+        // addProduct(newProduct);
+        // console.log("res: ", res);
+      } catch (error) {
+        console.error("There was an error submitting the data:", error);
+        toast.error(
+          "There was an error submitting the data:",
+          {
+            hideProgressBar: true,
+          },
+          2000
+        );
+        // Handle error scenarios (e.g., display an error message to the user)
+      }
+    } else {
+      console.log("Please fill all the box");
+      toast.info(
+        "Please fill all the box",
+        {
+          hideProgressBar: true,
+        },
+        2000
+      );
+    }
   };
 
   return (
     <section className="w-screen h-screen">
+      <Toaster richColors position="top-center" />
       <TopBar />
       <div className="flex h-[93%]">
         <SideNavBar />
@@ -126,7 +195,7 @@ const AddWebinar = () => {
                   </div>
                   <div className="relative w-full"></div>
                 </div>
-                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 items-center">
+                <div className="my-4 grid sm:grid-cols-2 xl:grid-cols-3 gap-5 items-center">
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["DatePicker"]}>
                       <DatePicker
