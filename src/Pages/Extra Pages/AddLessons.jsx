@@ -50,20 +50,17 @@ const AddLessons = () => {
           throw new Error("Network response was not ok");
         }
 
-        const res = await response.json();
+        // const res = await response.json();
 
         setTimeout(() => {
           toast.success(
-            "Stock POST successfully!",
+            "Lesson Added successfully!",
             {
               hideProgressBar: true,
             },
-            2000
+            1200
           );
-        }, 2000);
-        // Pass the newly created product data to the parent component
-        // addProduct(newProduct);
-        // console.log("res: ", res);
+        }, 1200);
 
         // Reset the form fields after successful submission
         setName("");
@@ -72,7 +69,13 @@ const AddLessons = () => {
         setLink("");
 
         console.log("Lesson added successfully!");
-        window.location.reload();
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2200);
+        // Pass the newly created product data to the parent component
+        // addProduct(newProduct);
+        // console.log("res: ", res);
       } catch (error) {
         console.error("There was an error submitting the data:", error);
         toast.error(

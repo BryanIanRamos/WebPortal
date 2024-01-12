@@ -10,11 +10,11 @@ import { userData } from "../Middleware/helper";
 
 const Activities = () => {
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
-  const { jwt } = userData();
+  const { jwt, id } = userData();
 
-  const { data } = useFetch(`${apiUrl}/api/false-activity`);
+  const { data } = useFetch(`${apiUrl}/api/false-activity/${id}`);
 
-  // console.log(data);
+  console.log(id);
 
   const deleteActivity = async (itemID) => {
     try {

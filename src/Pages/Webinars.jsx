@@ -9,9 +9,9 @@ import { Toaster, toast } from "sonner";
 
 const Webinars = () => {
   const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
-  const { jwt } = userData();
+  const { jwt, id } = userData();
 
-  const { data } = useFetch(`${apiUrl}/api/cpt-web`);
+  const { data } = useFetch(`${apiUrl}/api/cpt-web/${id}`);
 
   // console.log(data);
 

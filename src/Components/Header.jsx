@@ -17,10 +17,10 @@ const Header = ({ title, description, showDate, sm }) => {
         </p>
       </div>
       <div
-        className={`absolute top-6 right-5 flex flex-col gap-1 items-center
+        className={`absolute top-6 right-5 hidden md:flex flex-col gap-1 items-center 
         ${showDate ? "block" : "hidden"}`}
       >
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-1 items-center ">
           <Icon
             icon="mingcute:history-2-line"
             className=" text-white md:w-[28px] md:h-[28px]"

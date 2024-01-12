@@ -5,11 +5,19 @@ import { Icon } from "@iconify/react";
 import Header from "../Components/Header";
 import { userData } from "../Middleware/helper";
 import { Link } from "react-router-dom";
+import useFetch from "../Middleware/useFetch";
 
 const Home = () => {
+  const apiUrl = import.meta.env.VITE_MY_DOMAIN_API_;
   const { username, id } = userData();
 
-  console.log("id", id);
+  const { data: lessons } = useFetch(`${apiUrl}/api/latestFile/${id}`);
+  const { data: activities } = useFetch(`${apiUrl}/api/latestActivity/${id}`);
+  const { data: webinars } = useFetch(`${apiUrl}/api/latestWebinar/${id}`);
+
+  // console.log("lessons", lessons);
+  // console.log("activity", activities);
+  // console.log("webinars", webinars);
 
   return (
     <section className="w-screen h-screen">
@@ -29,19 +37,8 @@ const Home = () => {
               <Link to="/AddLesson">
                 <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
                   <Icon icon="bxs:book" className="  w-[40px] h-[40px]" />
-                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
+                  <p className=" text-lg  font-semibold font-['Poppins'] hidden sm:block">
                     Add Lessons
-                  </p>
-                </div>
-              </Link>
-              <Link to="/AddWebinar">
-                <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
-                  <Icon
-                    icon="fluent:device-meeting-room-16-filled"
-                    className="  w-[40px] h-[40px]"
-                  />
-                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
-                    Add Webinars
                   </p>
                 </div>
               </Link>
@@ -51,8 +48,19 @@ const Home = () => {
                     icon="ant-design:schedule-filled"
                     className="  w-[40px] h-[40px]"
                   />
-                  <p className=" text-lg font-semibold font-['Poppins'] hidden sm:block">
+                  <p className=" text-lg  font-semibold font-['Poppins'] hidden sm:block">
                     Add Activities
+                  </p>
+                </div>
+              </Link>
+              <Link to="/AddWebinar">
+                <div className="h-20 text-white hover:text-[#5A766A] bg-[#5A766A] hover:bg-gray-200 cursor-pointer rounded-[5px] flex items-center justify-center gap-2">
+                  <Icon
+                    icon="fluent:device-meeting-room-16-filled"
+                    className="  w-[40px] h-[40px]"
+                  />
+                  <p className=" text-lg  font-semibold font-['Poppins'] hidden sm:block">
+                    Add Webinars
                   </p>
                 </div>
               </Link>
@@ -64,6 +72,110 @@ const Home = () => {
               <h1 className="text-[#5A766A] text-xl font-bold font-['Poppins']">
                 Recently Added
               </h1>
+            </div>
+            <div className="max-w-full mt-3 grid grid-cols-3">
+              {/* lessons */}
+              <div>
+                <div
+                  className="h-[40.27px] bg-[#5A766A]  border border-slate-100 
+                overflow-hidden flex justify-center items-center"
+                >
+                  <span className="text-white text-[12px] md:text-[15px] font-semibold font-['Poppins']">
+                    Lessons
+                  </span>
+                </div>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={index}>
+                    {lessons && index < lessons.length ? (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          {lessons[index].name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          ----
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* Activities */}
+              <div>
+                <div
+                  className="h-[40.27px] bg-[#5A766A]  border border-slate-100 
+                overflow-hidden flex justify-center items-center"
+                >
+                  <span className="text-white text-[12px] md:text-[15px] font-semibold font-['Poppins']">
+                    Activities
+                  </span>
+                </div>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={index}>
+                    {activities && index < activities.length ? (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          {activities[index].name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          ----
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {/* Webinars */}
+              <div>
+                <div
+                  className="h-[40.27px] bg-[#5A766A]  border border-slate-100 
+                overflow-hidden flex justify-center items-center"
+                >
+                  <span className="text-white text-[12px] md:text-[15px] font-semibold font-['Poppins']">
+                    Webinars
+                  </span>
+                </div>
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={index}>
+                    {webinars && index < webinars.length ? (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          {webinars[index].name}
+                        </span>
+                      </div>
+                    ) : (
+                      <div
+                        className="h-[50.27px] bg-blue-950 bg-opacity-20 border border-slate-100 
+        overflow-hidden flex justify-center items-center"
+                      >
+                        <span className="text-[#5A766A] text-[9px] md:text-[13px] font-medium text-center px-2 font-['Poppins']">
+                          ----
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         </div>
