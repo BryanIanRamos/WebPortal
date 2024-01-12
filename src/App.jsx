@@ -19,14 +19,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Singin />} />
           <Route path="/Signup" element={<Signup />} />
-
-          <Route path="/AddLesson" element={<AddLessons />} />
-          <Route path="/AddWebinar" element={<AddWebinar />} />
+          {/* <Route path="/AddLesson" element={<AddLessons />} /> */}
+          {/* <Route path="/AddWebinar" element={<AddWebinar />} />
           <Route path="/AddActivities" element={<AddActivities />} />
-          <Route path="/List-activity" element={<ActivityList />} />
+          <Route path="/List-activity" element={<ActivityList />} /> */}
           {/* <Route path="/Signup" element={<Signup />} />
           <Route path="/Signup" element={<Signup />} /> */}
-
           {/* ProtectedRoutes */}
           <Route path="/Home" element={<Protector Component={Home} />} />
           <Route path="/Files" element={<Protector Component={Files} />} />
@@ -37,6 +35,22 @@ function App() {
           <Route
             path="/Webinars"
             element={<Protector Component={Webinars} />}
+          />{" "}
+          <Route
+            path="/AddLesson"
+            element={<Protector Component={AddLessons} />}
+          />{" "}
+          <Route
+            path="/AddWebinar"
+            element={<Protector Component={AddWebinar} />}
+          />{" "}
+          <Route
+            path="/AddActivities"
+            element={<Protector Component={AddActivities} />}
+          />{" "}
+          <Route
+            path="/List-activity"
+            element={<Protector Component={ActivityList} />}
           />
         </Routes>
       </Routers>

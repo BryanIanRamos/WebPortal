@@ -28,6 +28,7 @@ const Singin = () => {
         headers: {
           "Content-Type": "application/json",
           // Accept: "application/json",
+          // "ngrok-skip-browser-warning": "69420",
         },
         body: JSON.stringify({ email, password }),
       });
