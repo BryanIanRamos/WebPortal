@@ -22,6 +22,7 @@ const Activities = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
           Authorization: `Bearer ${jwt}`,
         },
       });
@@ -77,6 +78,7 @@ const Activities = () => {
         method: "PUT", // or 'PATCH' depending on your API
         headers: {
           "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
           // Accept: "application/json",
           Authorization: `Bearer ${jwt}`,
         },

@@ -27,6 +27,7 @@ const Singin = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "ngrok-skip-browser-warning": "69420",
           // Accept: "application/json",
           // "ngrok-skip-browser-warning": "69420",
         },

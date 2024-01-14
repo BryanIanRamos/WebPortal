@@ -15,6 +15,7 @@ const useFetch = (api) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "69420",
         Authorization: `Bearer ${jwt}`, // Include the bearer token in the Authorization header
       },
     };
